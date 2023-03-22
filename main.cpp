@@ -1,35 +1,24 @@
 /*
- *  chapter 01 : age
+ *  chapter 01 : hello
+ *  A program that get started Hello Qt,using unique_ptr preventing memory leak.
+ *  anthor:liChengYang
+ *  date:2023-3-5
+ *  version:
+ *
 */
 #include "mainwindow.h"
 
 #include <QApplication>
-#include <QHBoxLayout>
-#include <QSlider>
-#include <QSpinBox>
+#include <QLabel>
+#include <memory>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QWidget *window = new QWidget;
-    window->setWindowTitle("Enter Your Age");
+    std::unique_ptr<QLabel> label = std::make_unique<QLabel>("<h2><i>Hello</i>"
+                                                             "<font color=red>Qt!</font></h2>");
 
-    QSpinBox *spinBox = new QSpinBox;
-    QSlider *slider = new QSlider(Qt::Horizontal);//水平
-    spinBox->setRange(0,130);
-    slider->setRange(0,130);
 
-    QObject::connect(spinBox,SIGNAL(valueChanged(int)), slider,SLOT(setValue(int)));
-    QObject::connect(slider,SIGNAL(valueChanged(int)), spinBox,SLOT(setValue(int)));
-    spinBox->setValue(35);
-
-    //QHBoxLayout *layout = new QHBoxLayout;//水平布局
-    QVBoxLayout *layout = new QVBoxLayout;//垂直布局
-
-    layout->addWidget(spinBox);
-    layout->addWidget(slider);
-    window->setLayout(layout);
-
-    window->show();
+    label->show();
     return a.exec();
 }
