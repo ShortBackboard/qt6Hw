@@ -1,6 +1,5 @@
 /*
- *  chapter 01 : hello
- *  A program that get started Hello Qt,using unique_ptr preventing memory leak.
+ *  chapter 01 : quit
  *  anthor:liChengYang
  *  date:2023-3-5
  *  version:
@@ -9,16 +8,14 @@
 #include "mainwindow.h"
 
 #include <QApplication>
-#include <QLabel>
+#include <QPushButton>
 #include <memory>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    std::unique_ptr<QLabel> label = std::make_unique<QLabel>("<h2><i>Hello</i>"
-                                                             "<font color=red>Qt!</font></h2>");
-
-
-    label->show();
-    return a.exec();
+    QApplication app(argc, argv);
+    QPushButton *button = new QPushButton("quit");
+    QObject::connect(button,&QPushButton::clicked,&app,&QApplication::quit);
+    button->show();
+    return app.exec();
 }
