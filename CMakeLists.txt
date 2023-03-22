@@ -1,27 +1,28 @@
 cmake_minimum_required(VERSION 3.25)
 
-project(Qt6-projects-gits VERSION 0.1 LANGUAGES CXX)
+project(finddialog VERSION 0.1 LANGUAGES CXX)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 qt_standard_project_setup()
 
-qt_add_executable(Qt6-projects-gits)
+qt_add_executable(finddialog)
 
-target_sources(Qt6-projects-gits
+target_sources(finddialog
     PRIVATE
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+        #mainwindow.cpp
+        #mainwindow.h
+        #mainwindow.ui
+        finddialog.cpp  finddialog.h
         
     PUBLIC
         
 )
 
-target_compile_features(Qt6-projects-gits PRIVATE cxx_std_20)
+target_compile_features(finddialog PRIVATE cxx_std_20)
 
-target_link_libraries(Qt6-projects-gits 
+target_link_libraries(finddialog 
     PRIVATE 
         Qt6::Widgets
 )
@@ -69,7 +70,7 @@ target_link_libraries(Qt6-projects-gits
 
 
 
-# set_target_properties(Qt6-projects-gits PROPERTIES
+# set_target_properties(finddialog PROPERTIES
 #     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
 #     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
 #     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -77,19 +78,19 @@ target_link_libraries(Qt6-projects-gits
 #     WIN32_EXECUTABLE TRUE
 # )
 
-# install(TARGETS Qt6-projects-gits
+# install(TARGETS finddialog
 #     BUNDLE DESTINATION .
 #     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 # if(QT_VERSION_MAJOR EQUAL 6)
-#     qt_finalize_executable(Qt6-projects-gits)
+#     qt_finalize_executable(finddialog)
 # endif()
 
 
 
 
 
-#qt_add_executable(Qt6-projects-gits)  //Creates and finalizes an application target of a platform-specific type.
+#qt_add_executable(finddialog)  //Creates and finalizes an application target of a platform-specific type.
 #This command performs the following tasks:
 
 #    1. Create a CMake target of the appropriate type for the target platform.
