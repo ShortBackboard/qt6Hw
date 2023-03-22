@@ -66,6 +66,4 @@ void FindDialog::findClicked(){
     }else{
         emit findNext(text,cs);
     }
-
-
 }
