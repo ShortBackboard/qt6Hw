@@ -25,15 +25,6 @@ private slots:
 public:
     FindDialog(QWidget *parent = 0);
 
-private:
-    QPushButton *_find;
-    QPushButton *_close;
-    QLabel *_label;
-    QLineEdit *_lineEdit;
-    QCheckBox *_caseCheck;
-    QCheckBox *_searchCheck;
-
-
 
 };
 #endif // FINDDIALOG_H
