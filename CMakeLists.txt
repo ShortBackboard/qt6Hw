@@ -11,9 +11,9 @@ qt_add_executable(Qt6-projects-gits)
 target_sources(Qt6-projects-gits
     PRIVATE
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+        window.h    window.cpp
+        label.h     label.cpp
+        labelChild.h    labelChild.cpp
         
     PUBLIC
         
