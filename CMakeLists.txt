@@ -13,7 +13,7 @@ target_sources(Qt6-projects-gits
         main.cpp
         window.h    window.cpp
         label.h     label.cpp
-        labelChild.h    labelChild.cpp
+
         
     PUBLIC
         

@@ -1,10 +1,10 @@
 #include "label.h"
 #include <QDebug>
-#include "labelChild.h"
+
 
 Label::Label(QWidget *parent):QLabel(parent)
 {
-    _labelChild = new LabelChild{this};
+
     setGeometry(200,200,150,150);
     setText("Label");
     setBackgroundRole(QPalette::Dark);

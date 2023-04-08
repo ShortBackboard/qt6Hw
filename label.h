@@ -3,7 +3,7 @@
 
 #include <QLabel>
 #include <QEvent>
-class LabelChild;
+
 
 class Label : public QLabel
 {
@@ -12,8 +12,7 @@ public:
 
     virtual bool event(QEvent *e) override;//事件处理
 
-private:
-    LabelChild *_labelChild;
+
 };
 
 #endif // LABEL_H

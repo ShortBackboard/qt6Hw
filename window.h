@@ -10,7 +10,12 @@ class Window : public QWidget{
 
 public:
     Window(QWidget *parent = nullptr);
-    virtual bool event(QEvent *event) override;//事件处理
+
+    virtual bool event(QEvent *e) override;//事件处理
+
+    //重写基类的eventfilter方法,事件过滤捕获
+    bool eventFilter(QObject *watched, QEvent *event);
+
     ~Window();
 
 private:
