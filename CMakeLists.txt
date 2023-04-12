@@ -12,7 +12,6 @@ target_sources(Qt6-projects-gits
     PRIVATE
         main.cpp
         window.h    window.cpp
-        label.h     label.cpp
 
         
     PUBLIC
