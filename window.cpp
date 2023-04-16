@@ -1,25 +1,31 @@
 #include "window.h"
 
-#include <QtDebug>
-#include <QMouseEvent>
-
+#include "button.h"
 
 Window::Window(QWidget *parent)
     : QWidget(parent)
 {
 
+    setGeometry(400,300,100,90);
+
+    _button = new Button{this};
+
+    QObject::connect(_button, &Button::mouseClick,
+                     this, &Window::mouseClickEvent);
+
+
 }
 
-void Window::closeEvent(QCloseEvent *event)
+
+//槽函数
+//关闭窗口
+void Window::mouseClickEvent()
 {
-    event->ignore();//忽略此事件,继续向父类传递
-    //event->accept();
-    qDebug() <<"closeEvent";
+    exit(0);
 }
+
 
 
 Window::~Window()
 {
 }
-
-

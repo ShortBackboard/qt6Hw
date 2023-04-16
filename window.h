@@ -2,20 +2,21 @@
 #define WINDOW_H
 
 #include <QWidget>
-#include <QEvent>
-
+class Button;
 
 class Window : public QWidget{
     Q_OBJECT
 
 public:
     Window(QWidget *parent = nullptr);
-
-    void closeEvent(QCloseEvent *event);
-
     ~Window();
+
+public slots:
+    //槽函数
+    void mouseClickEvent();
+
+private:
+    Button *_button;//子类
 };
-
-
 
 #endif // WINDOW_H
