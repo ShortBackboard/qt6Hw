@@ -10,18 +10,6 @@ Window::Window(QWidget *parent)
 
     _button = new Button{this};
 
-    QObject::connect(_button, &Button::mouseClick,
-                     this, &Window::mouseClickEvent);
-
-
-}
-
-
-//槽函数
-//关闭窗口
-void Window::mouseClickEvent()
-{
-    exit(0);
 }
 
 

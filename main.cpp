@@ -1,18 +1,15 @@
 /* A program : An exit test from PPT-02 and further rewrite.
  *
  * author : liChengYang2019051604044
- * date : 2023-4-16
+ * date : 2023-4-17
  *
  * branch : event
  *
- * 在Button中定义了信号
- * 在Window中定义了槽函数
+ * 使用定时器,超时触发timerEvent事件
  *
  */
 
-
 #include <QApplication>
-
 #include "window.h"
 
 #include <memory>

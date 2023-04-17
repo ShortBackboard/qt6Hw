@@ -11,9 +11,6 @@ public:
     Window(QWidget *parent = nullptr);
     ~Window();
 
-public slots:
-    //槽函数
-    void mouseClickEvent();
 
 private:
     Button *_button;//子类

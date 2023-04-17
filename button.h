@@ -3,24 +3,22 @@
 
 #include <QPushButton>
 #include <QEvent>
-#include <QDateTime>
+
 
 class Button : public QPushButton{
     Q_OBJECT
 public:
     Button(QWidget *parent = nullptr);
 
+protected:
     virtual bool event(QEvent *e) override;
+    virtual void timerEvent(QTimerEvent *e) override;
 
-signals:
-    //小于300ms则认为是mouseClick，调用mouseClickEvent
-    //信号
+private:
     void mouseClick();
 
 private:
-    QDateTime pressTime;//点击按钮时间
-    QDateTime releaseTime;//释放按钮时间
-
+    int m_timerId;//定时器Id
 
 };
 
