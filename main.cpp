@@ -1,12 +1,11 @@
 /* A program : An exit test from PPT-02 and further rewrite.
  *
  * author : liChengYang2019051604044
- * date : 2023-4-17
+ * date : 2023-4-19
  *
  * branch : event
  *
- * 使用定时器,超时触发timerEvent事件
- *
+ * use <QBasicTimer>
  */
 
 #include <QApplication>

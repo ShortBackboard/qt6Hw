@@ -11,7 +11,6 @@ public:
     Window(QWidget *parent = nullptr);
     ~Window();
 
-
 private:
     Button *_button;//子类
 };
