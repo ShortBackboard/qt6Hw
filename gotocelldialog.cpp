@@ -1,29 +1,47 @@
 #include "gotocelldialog.h"
-#include "ui_gotocelldialog.h"
-#include <QtWidgets>
-#include <QtGui>
+#include "ui_gotocell.h"
 
+#include <QRegularExpressionValidator>  //注意，QRegExpValidator已经被Qt6废弃
+#include <QDebug>
 
-gotocelldialog::gotocelldialog(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::GoToCellDialog)
+GoToCellDialog::GoToCellDialog(QWidget *parent):
+    QDialog(parent),
+    _ui{new Ui::gotocell_bridge{}}
 {
-    ui->setupUi(this);
-    QRegularExpression regExp("[A-Za-z][1-9][0-9]{0,2}");//正则表达式
-    ui->lineEdit->setValidator(new QRegularExpressionValidator(regExp, this));//设置文本框内容规则
+    _ui->setupUi(this);
 
-    connect(ui->okButton,SIGNAL(clicked()), this, SLOT(accept()));
-    connect(ui->cancelButton,SIGNAL(clicked()) ,this, SLOT(reject()));
+    QRegularExpression regExp{"[a-zA-Z][1-9][0-9]{0,2}"};
+    _ui->lineEdit->setValidator(new QRegularExpressionValidator{regExp, this});
 
+    connect(_ui->okButton, &QPushButton::clicked, this, &GoToCellDialog::accept);
+    connect(_ui->cancelButton, &QPushButton::clicked, this, &GoToCellDialog::reject);
 }
 
-void gotocelldialog::on_lineEdit_textChanged(){
-    ui->okButton->setEnabled(ui->lineEdit->hasAcceptableInput());//判断文本框的内容是否有效
-}
-
-
-gotocelldialog::~gotocelldialog()
+GoToCellDialog::~GoToCellDialog()
 {
-    delete ui;
+    delete _ui;
 }
 
+void GoToCellDialog::on_lineEdit_textChanged()
+//
+{
+    _ui->okButton->setEnabled(_ui->lineEdit->hasAcceptableInput());
+    qDebug()<<"on_lineEdit_textChanged."; //qDebug()函数会返回一个类型为QDebug的，用于输出调试信息的输出流对象。
+                                          //该流对象会自动在每个输出项之间放一个空格，并在最后输出项之后输出一个换行符，它支持许多c++和Qt类型。
+}
+
+void GoToCellDialog::reject(){
+    qDebug()<<"invoke reject()";
+    QDialog::reject();
+
+}
+
+void GoToCellDialog::accept(){
+    qDebug()<<"invoke accept()";
+    QDialog::accept();
+}
+
+QString GoToCellDialog::getCellLocation()
+{
+    return _ui->lineEdit->text().toUpper();
+}

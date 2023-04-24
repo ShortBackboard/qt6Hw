@@ -1,26 +1,28 @@
+// sort dialog
+// author:stardust
+// date: 2023-04-21
+// 采用指针的方式来实现SortDialog类和Ui::bridge类的组合关系
+// Ui::bridge类存放在ui_sort.h中，该头文件是通过编译sort.ui文件自动生成的。
 #ifndef SORTDIALOG_H
 #define SORTDIALOG_H
 
 #include <QDialog>
-#include "ui_sortdialog.h"
 
+namespace Ui {
+class sort_bridge;
+}
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class sortdialog; }
-QT_END_NAMESPACE
-
-class sortdialog : public QDialog
+class SortDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    sortdialog(QWidget *parent = nullptr);
-    ~sortdialog();
-
-public slots:
+    explicit SortDialog(QWidget *parent = 0);
+    ~SortDialog();
     void setColumnRange(QChar first, QChar last);
 
-private:
-    Ui::SortDialog *ui;
+//private:
+    Ui::sort_bridge *ui;
 };
+
 #endif // SORTDIALOG_H

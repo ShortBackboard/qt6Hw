@@ -1,11 +1,10 @@
 #include "sortdialog.h"
-#include "ui_sortdialog.h"
-#include <QtGui>
+#include "ui_sort.h"
+#include <iostream>
 
-
-sortdialog::sortdialog(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::SortDialog)
+SortDialog::SortDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::sort_bridge)
 {
     ui->setupUi(this);
 
@@ -13,30 +12,30 @@ sortdialog::sortdialog(QWidget *parent)
     ui->tertiaryGroupBox->hide();
     layout()->setSizeConstraint(QLayout::SetFixedSize);
 
-    setColumnRange('A','Z');
+    setColumnRange('A', 'Z');
 }
 
-void sortdialog::setColumnRange(QChar first, QChar last){
+void SortDialog::setColumnRange(QChar first, QChar last)
+{
     ui->primaryColumnCombo->clear();
     ui->secondaryColumnCombo->clear();
     ui->tertiaryColumnCombo->clear();
 
-    ui->secondaryColumnCombo->addItem(tr("None"));
-    ui->tertiaryColumnCombo->addItem(tr("None"));
-    ui->primaryColumnCombo->setMinimumSize(
-        ui->secondaryColumnCombo->sizeHint());
+    ui->secondaryColumnCombo->addItem("None");
+    ui->tertiaryColumnCombo->addItem("None");
 
+    ui->primaryColumnCombo->setMinimumSize(ui->secondaryColumnCombo->sizeHint());
     QChar ch = first;
     while(ch <= last){
         ui->primaryColumnCombo->addItem(QString(ch));
         ui->secondaryColumnCombo->addItem(QString(ch));
         ui->tertiaryColumnCombo->addItem(QString(ch));
-        ch = (QChar)(ch.unicode() + 1);
+//        std::cerr << std::showbase << std::hex << ch.unicode() << '\n'; //only valid in c++17
+        ch = ++(ch.unicode());
     }
 }
 
-sortdialog::~sortdialog()
+SortDialog::~SortDialog()
 {
     delete ui;
 }
-

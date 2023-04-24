@@ -1,65 +1,85 @@
-#include <QtGui>
+/*
+ * author:stardust
+ * date:2022-03-22
+ *
+ * the implementation of class FindDialog using modern c++ and Qt6
+ */
 #include "finddialog.h"
-
+#include <QtWidgets>
 
 FindDialog::FindDialog(QWidget *parent)
-    : QDialog(parent)
-
+    : QDialog{parent},
+      _label {new QLabel(tr("Find &what"))},
+      _lineEdit {new QLineEdit()},
+      _caseCheckBox {new QCheckBox(tr("Match &case"))},
+      _backwardCheckBox {new QCheckBox(tr("Search &backward"))},
+      _findButton {new QPushButton(tr("Find"))},
+      _closeButton {new QPushButton(tr("Close"))}
 {
-    //绑定父类，临时对象
-    new QLabel(tr("find &what"),this);
-    new QLineEdit(this);
-    new QPushButton(tr("&find"),this);
-    new QPushButton(tr("&close"),this);
-    new QCheckBox(tr("&Match case"),this);
-    new QCheckBox(tr("&Search backward"),this);
+    _label->setBuddy(_lineEdit);
 
-    //寻找孩子
-    auto _label = this->findChild<QLabel *>();
-    auto _lineEdit = this->findChild<QLineEdit *>();
-    auto _checks = this->findChildren<QCheckBox *>();//返回列表
-    auto _buttons = this->findChildren<QPushButton *>();
+    _findButton -> setEnabled(false);
+    _findButton -> setDefault(true);
 
-    _label->setBuddy(_lineEdit);//设置伙伴
+    QHBoxLayout *topleftLayout = new QHBoxLayout();
+    topleftLayout ->addWidget(_label);
+    topleftLayout ->addWidget(_lineEdit);
 
-    _buttons[0]->setDefault(true);
-    _buttons[0]->setEnabled(false);//设置不可选
+    QVBoxLayout *leftLayout = new QVBoxLayout();
+    leftLayout ->addLayout(topleftLayout);
+    leftLayout ->addWidget(_caseCheckBox);
+    leftLayout ->addWidget(_backwardCheckBox);
 
-    setWindowTitle(tr("Find"));//设置窗口标题
+    QVBoxLayout *rightLayout = new QVBoxLayout();
+    rightLayout ->addWidget(_findButton);
+    rightLayout ->addWidget(_closeButton);
+    rightLayout ->addStretch();
 
-    //设置布局
-    this->setGeometry(0,0,260,110);
-    _label->setGeometry(10,10,70,30);//x,y,w,h
-    _lineEdit->setGeometry(80,15,70,20);
-    _checks[0]->setGeometry(10,40,100,20);
-    _checks[1]->setGeometry(10,70,100,20);
-    _buttons[0]->setGeometry(180,30,50,30);
-    _buttons[1]->setGeometry(180,60,50,30);
+    QHBoxLayout *mainLayout = new QHBoxLayout();
+    mainLayout ->addLayout(leftLayout);
+    mainLayout ->addLayout(rightLayout);
 
-    connect(_buttons[1], &QPushButton::clicked,
-            this,&QApplication::quit);
+    setLayout(mainLayout);
 
-    connect(_buttons[0], SIGNAL(clicked()),
-            this,SLOT(findClicked()));
+    setWindowTitle(tr("Find"));
+    setFixedHeight(sizeHint().height());
 
-    connect(_lineEdit, SIGNAL(textChanged(QString)),
-            this, SLOT(enableFindButton(QString)));
+    connect(_lineEdit, &QLineEdit::textChanged,
+            this, &FindDialog::enableFindButton);
+    connect(_findButton, &QPushButton::clicked,
+            this, &FindDialog::findClicked);
+    connect(_closeButton, &QPushButton::clicked,
+            this, &FindDialog::close);
 }
 
+FindDialog::~FindDialog()
+{
 
-
-void FindDialog::enableFindButton(const QString &text){
-    this->findChild<QPushButton *>()->setEnabled(!text.isEmpty());
 }
 
-void FindDialog::findClicked(){
-    QString text = this->findChild<QLineEdit *>()->text();
-    Qt::CaseSensitivity cs = this->findChild<QCheckBox *>()->isChecked() ?
-                Qt::CaseSensitive : Qt::CaseInsensitive;
+void FindDialog::enableFindButton(const QString &text)
+{
+    _findButton ->setEnabled(!(text.isEmpty()));
+}
 
-    if(this->findChild<QCheckBox *>()->isChecked()){
-        emit findPrevious(text,cs);
-    }else{
-        emit findNext(text,cs);
+void FindDialog::findClicked()
+{
+    Qt::CaseSensitivity cs =
+            _caseCheckBox->isChecked() ? Qt::CaseSensitive
+                                       : Qt::CaseInsensitive;
+    if(_caseCheckBox->isChecked())
+        cs = Qt::CaseSensitive;
+    else
+        cs = Qt::CaseInsensitive;
+
+    QString text = _lineEdit->text();
+    if(_backwardCheckBox->isChecked()){
+        emit findPrevious(text, cs);
+        qDebug() << "Singal findPrevious is emitted.";
     }
+    else{
+        emit findNext(text, cs);
+        qDebug() << "Singal findNext is emitted.";
+    }
+
 }
