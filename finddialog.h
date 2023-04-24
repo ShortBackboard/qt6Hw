@@ -1,42 +1,27 @@
 #ifndef FINDDIALOG_H
 #define FINDDIALOG_H
 #include <QDialog>
-#include <QtWidgets>
 
-class QCheckBox;
-class QLabel;
-class QLineEdit;
-class QPushButton;
+QT_BEGIN_NAMESPACE
+namespace Ui { class bridge; }//前置声明,不包含对应头文件,加快预处理速度
+QT_END_NAMESPACE
 
-
-class FindDialog : public QDialog
+class Finddialog : public QDialog//继承时需要包含头文件完整定义
 {
     Q_OBJECT
 
-signals:
-    void findNext(const QString &str, Qt::CaseSensitivity cs);
-    void findPrevious(const QString &str, Qt::CaseSensitivity cs);
+public:
+    explicit Finddialog(QWidget *parent = nullptr);
+    virtual ~Finddialog();
+    //virtual void reject() override;
+    //virtual void accept() override;//按下ok按钮时调用,需要connect
 
 private slots:
-    void findClicked();
-    void enableFindButton(const QString &text);
-
-
-public:
-    FindDialog(QWidget *parent = 0);
+    void on__close_clicked();
 
 private:
-    QPushButton *_find;
-    QPushButton *_close;
-    QLabel *_label;
-    QLineEdit *_lineEdit;
-    QCheckBox *_caseCheck;
-    QCheckBox *_searchCheck;
-
-
-
+    Ui::bridge *_ui;//组合关系
 };
+
+
 #endif // FINDDIALOG_H
-
-
-
