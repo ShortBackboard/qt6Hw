@@ -35,6 +35,37 @@ void SortDialog::setColumnRange(QChar first, QChar last)
     }
 }
 
+int SortDialog::primaryColumnComboCurrentIndex()
+{
+    return ui->primaryColumnCombo->currentIndex();
+}
+
+int SortDialog::secondaryColumnComboCurrentIndex()
+{
+    return ui->secondaryColumnCombo->currentIndex();
+}
+
+int SortDialog::tertiaryColumnComboCurrentIndex()
+{
+    return ui->tertiaryColumnCombo->currentIndex();
+}
+
+int SortDialog::primaryOrderComboCurrentIndex()
+{
+    return ui->primaryOrderCombo->currentIndex();
+}
+
+int SortDialog::secondaryOrderComboCurrentIndex()
+{
+    return ui->secondaryOrderCombo->currentIndex();
+}
+
+int SortDialog::tertiaryOrderComboCurrentIndex()
+{
+    return ui->tertiaryOrderCombo->currentIndex();
+}
+
+
 SortDialog::~SortDialog()
 {
     delete ui;

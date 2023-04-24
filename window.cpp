@@ -6,7 +6,7 @@
 #include "finddialog.h"
 #include "gotocelldialog.h"
 #include "sortdialog.h"
-#include "ui_sort.h"
+
 
 #include <QTableWidgetSelectionRange>
 
@@ -153,18 +153,12 @@ void Window::on_action_Sort_triggered()
 
     if (sortDialog->exec()) {
         SpreadsheetCompare compare;
-        compare.keys[0] = sortDialog->ui->
-                          primaryColumnCombo->currentIndex();
-        compare.keys[1] = sortDialog->ui->
-                          secondaryColumnCombo->currentIndex() - 1;
-        compare.keys[2] = sortDialog->ui->
-                          tertiaryColumnCombo->currentIndex() - 1;
-        compare.ascending[0] =
-            (sortDialog->ui->primaryOrderCombo->currentIndex() == 0);
-        compare.ascending[1] =
-            (sortDialog->ui->secondaryOrderCombo->currentIndex() == 0);
-        compare.ascending[2] =
-            (sortDialog->ui->tertiaryOrderCombo->currentIndex() == 0);
+        compare.keys[0] = sortDialog->primaryColumnComboCurrentIndex();
+        compare.keys[1] = sortDialog->secondaryColumnComboCurrentIndex() - 1;
+        compare.keys[2] = sortDialog->tertiaryColumnComboCurrentIndex() - 1;
+        compare.ascending[0] = (sortDialog->primaryOrderComboCurrentIndex() == 0);
+        compare.ascending[1] = (sortDialog->secondaryOrderComboCurrentIndex() == 0);
+        compare.ascending[2] = (sortDialog->tertiaryOrderComboCurrentIndex() == 0);
         _ui->spreadsheet->sort(compare);
     }
 }

@@ -20,6 +20,14 @@ public:
     explicit SortDialog(QWidget *parent = 0);
     ~SortDialog();
     void setColumnRange(QChar first, QChar last);
+    
+    int primaryColumnComboCurrentIndex();
+    int secondaryColumnComboCurrentIndex();
+    int tertiaryColumnComboCurrentIndex();
+
+    int primaryOrderComboCurrentIndex();
+    int secondaryOrderComboCurrentIndex();
+    int tertiaryOrderComboCurrentIndex();
 
 //private:
     Ui::sort_bridge *ui;
