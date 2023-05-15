@@ -16,7 +16,7 @@
      并且前者是后者的父环境,或者称为创建环境 (creation context) 。
 */
 
-//inline 组件环境的创建环境
+//通过类型名创建 inline 组件对象,没有创建环境
 import QtQuick
 
 Rectangle{
@@ -25,9 +25,13 @@ Rectangle{
 
     A{id:my}//实例化的一个对象
 
-    Loader{sourceComponent: my.mycomponent}
-    Loader{sourceComponent: my.mycomponent; y:30}
-    Loader{sourceComponent: my.mycomponent; y:60}
+    // @disable-check M300
+    Loader{sourceComponent: A.MyType{}}
+    // @disable-check M300
+    Loader{sourceComponent: A.MyType{y:30}}
+    // @disable-check M300
+    Loader{sourceComponent: A.MyType{y:60}}
+
 }
 
 
