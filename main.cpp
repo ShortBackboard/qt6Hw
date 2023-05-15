@@ -1,8 +1,8 @@
 /*
- * A program : QtQuick 项目中通过 context 传递数据
+ * A program : C++ module import
  *
  * anthor:2019051604044liChengYang
- * date:2023-5-13
+ * date:2023-5-14
  *
  *
  *
@@ -10,7 +10,6 @@
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
@@ -18,10 +17,9 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    double d = 10.5;
-    engine.rootContext()->setContextProperty("p1",d);
 
-    const QUrl url("qrc:/Main.qml");
+    const QUrl url(u"qrc:/Main.qml"_qs);
+
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
         &app, [url](QObject *obj, const QUrl &objUrl) {
             if (!obj && url == objUrl)

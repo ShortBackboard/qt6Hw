@@ -13,14 +13,16 @@ target_include_directories(appqml PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_sources(appqml
     PRIVATE
         main.cpp
-        
+        message.cpp
+        message.h
+        message.qrc
     PUBLIC
-    qml.qrc
+
         
 )
 
 qt_add_qml_module(appqml
-    URI qml
+    URI message
     VERSION 1.0
     QML_FILES 
         Main.qml

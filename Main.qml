@@ -1,12 +1,18 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick
+import message
 
-ApplicationWindow {
-    visible: true
-    title: qsTr("setting a context property")
-    Text {
-        anchors.centerIn: parent
-        text: p1//from main.cpp set
-        color: "red"
+Window{
+    visible: true; width: 400; height: 50
+    title: qsTr("register an instantiable object type")
+
+    Message{
+        id:m;
+        author: "lcy"
+        creationDate: new Date()
+    }
+
+    Column{
+        Text{ text: m.author; color: "red"}
+        Text{ text: m.creationDate; color: "blue"}
     }
 }
