@@ -8,7 +8,7 @@
  *
  * anthor:2019051604044liChengYang
  *
- * date:2023-5-13
+ * date:2023-5-14
  *
  *
  *   内部组件 ( 环境 ) 的创建环境:如果内部组件是通过其复合组件对象
@@ -16,20 +16,29 @@
      并且前者是后者的父环境,或者称为创建环境 (creation context) 。
 */
 
+//匿名组件环境的创建环境
 import QtQuick
 
-ListView {
-    id: root
-    property string message: "in Main.qml context"
+Rectangle{
     width: 200
-    height: 100
-    spacing: 2
-    model: 3
-    delegate: MyType{}
+    height: 200
 
-    component MyType : Rectangle{
-        width: 50; height: 20; color: "red"
-        Component.onCompleted:
-            console.log(root.message)
-    }
+    A{id:my}//实例化的一个对象
+
+    Loader{sourceComponent: my.mycomponent}
+    Loader{sourceComponent: my.mycomponent; y:30}
+    Loader{sourceComponent: my.mycomponent; y:60}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
