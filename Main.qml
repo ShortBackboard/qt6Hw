@@ -16,22 +16,16 @@
      并且前者是后者的父环境,或者称为创建环境 (creation context) 。
 */
 
-//通过类型名创建 inline 组件对象,没有创建环境
+//在独立的创建环境中创建内部组件对象
 import QtQuick
 
-Rectangle{
+ListView{
     width: 200
-    height: 200
-
-    A{id:my}//实例化的一个对象
-
-    // @disable-check M300
-    Loader{sourceComponent: A.MyType{}}
-    // @disable-check M300
-    Loader{sourceComponent: A.MyType{y:30}}
-    // @disable-check M300
-    Loader{sourceComponent: A.MyType{y:60}}
-
+    height: 100
+    A{id:my}
+    spacing: 2
+    model: 3
+    delegate: my.mycomponent
 }
 
 
