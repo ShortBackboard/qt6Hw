@@ -16,7 +16,7 @@
      并且前者是后者的父环境,或者称为创建环境 (creation context) 。
 */
 
-//匿名组件环境的创建环境
+//inline 组件环境的创建环境
 import QtQuick
 
 Rectangle{
