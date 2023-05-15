@@ -16,7 +16,7 @@
      并且前者是后者的父环境,或者称为创建环境 (creation context) 。
 */
 
-//在独立的创建环境中创建内部组件对象
+//在没有创建环境的情况下创建内部组件对象
 import QtQuick
 
 ListView{
@@ -25,7 +25,8 @@ ListView{
     A{id:my}
     spacing: 2
     model: 3
-    delegate: my.mycomponent
+    // @disable-check M300
+    delegate: A.MyType{}
 }
 
 
