@@ -8,11 +8,14 @@
 或者定义一个逻辑上属于该 document 的组件。
  *
  * 可通过其唯一需要定义的 id 来引用
+ *
+ * 使用TapHandler事件处理与Loader的id的关联，使匿名组件点击后才被Loader动态创建显示
 */
 
 import QtQuick
 
 Item {
+
     width: 150; height: 150
 
     //该匿名组件直到请求时才会被加载并实例化 ( 如将 id 指定给 2 个 Loader对象的 sourceComponent )
@@ -26,7 +29,16 @@ Item {
         }
     }
 
-    Loader { sourceComponent: redSquare}
-    Loader { sourceComponent: redSquare; x:100}
+//    Loader { sourceComponent: redSquare}
+//    Loader { sourceComponent: redSquare; x:100}
+
+    Loader { id : newLoader}
+
+
+    TapHandler{//事件处理对象
+        onTapped: {
+            newLoader.sourceComponent = redSquare
+        }
+    }
 
 }
