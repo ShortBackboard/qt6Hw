@@ -1,5 +1,5 @@
 /*
- *  Property Modifier Objects use test
+ *  signal handler attributes
  *
  * anthor:2019051604044liChengYang
  *
@@ -9,31 +9,18 @@
 
 //Main.qml
 
+
 import QtQuick
 import QtQuick.Controls
 
-
-Item {
-    width: 500
-    height: 500
-
-    Rectangle{
-        width: 20
-        height: 20
-        color: "pink"
-
-        NumberAnimation on x {
-            from: 0
-            to:300
-            loops: Animation.Infinite
-            duration: 2000
-        }
-        NumberAnimation on y {
-            from: 0
-            to:300
-            loops: Animation.Infinite
-            duration: 2000
-        }
+Rectangle{
+    width: 200
+    height: 200
+    TapHandler{
+        onTapped: (handlerPoint)=>{
+                      console.log(handlerPoint.position.x,
+                                  handlerPoint.position.y)
+                  }
     }
 }
 
