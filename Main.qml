@@ -1,7 +1,6 @@
 /*
- *  test in PPT
+ *  State use test.
  *
- *  id Attribute use test
  *
  * anthor:2019051604044liChengYang
  *
@@ -10,28 +9,31 @@
 */
 
 //Main.qml
-import QtQuick 2.0
 
+import QtQuick
+import QtQuick.Controls
 
+Rectangle {
+    id: myRect
+    width: 100; height: 100
+    state: "released"   //默认state为空 ' '
 
-
-Column{
-    width: 200
-    height: 200
-
-    TextInput{//Displays an editable line of text
-        id:input;text: "hello,world"
+    TapHandler{
+        onTapped:myRect.state === "clicked" ? myRect.state = "released" : myRect.state = "clicked";
     }
 
-    Text {
-        text: input.text
-    }
 
-    TextEdit{
-        width: 100
-        height: 20
-        color: "green"
-    }
+    states: [
+        State {
+            name: "clicked" //点击
+            PropertyChanges { target: myRect; color: "red" }
+        },
+
+        State {
+            name: "released" //释放
+            PropertyChanges {target: myRect; color:"blue"}
+        }
+    ]
 }
 
 
