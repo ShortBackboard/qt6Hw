@@ -1,9 +1,7 @@
 /*
  *  Loader QML 类型
- *
- *  动态加载:
- * 加载一个 QML document 文件 ( 使用 source 特性 )
-   加载一个 Component 对象 ( 使用 sourceComponent 特性 )
+ *  Loader: dynamically load example02: loader and destroy
+ * 动态加载对象的访问和销毁
  *
  *
  * anthor:2019051604044liChengYang
@@ -37,11 +35,14 @@ Item {
     TapHandler{
         onTapped: {
 //            item property 容纳了当前加载对象的顶层对象。
-            l1.item.color = "blue"
-            l1.item.width = 100
-            l1.item.height = 100
+            l1.sourceComponent = undefined
+            l2.source = ""
 
-            l2.item.font.bold = true
+            l1.source = "MyLabel.qml"
+            l2.sourceComponent = redSquare
+
+            l2.item.x = 60
+            l2.item.color = "blue"
         }
     }
 
