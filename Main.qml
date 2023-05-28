@@ -1,7 +1,7 @@
 /*
  *  signal handler attributes
  *
- *  Attached properties example 01
+ *  Attached properties and ListView :example 02
  *
  * anthor:2019051604044liChengYang
  *
@@ -15,14 +15,16 @@
 import QtQuick
 import QtQuick.Controls
 
-Item {
-    width: 200; height: 200
+ListView{
+    width: 240; height: 320
+    model: 15
+    currentIndex: 2; spacing: 2
 
-    focus: true
-    Keys.enabled: true //enables key handling
-    Keys.onDigit0Pressed: console.log("Digit0 clicked")
-
-
+    delegate: Rectangle{
+        width: 100
+        height: 30
+        color:ListView.isCurrentItem ? "blue" : "green"
+    }
 }
 
 
