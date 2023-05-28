@@ -1,7 +1,6 @@
 /*
- *  signal handler attributes
  *
- *  Attached properties and ListView :example 03
+ *  enumeration attributes
  *
  * anthor:2019051604044liChengYang
  *
@@ -15,37 +14,23 @@
 import QtQuick
 import QtQuick.Controls
 
-ListView{//ListView 类型有一个 attached property: isCurrentItem
-    width: 240; height: 320
-    spacing: 2
+Text {
+    width: 200
+    height: 200
+    text: qsTr("text")
 
-    model: ListModel{//数量
-        id:lm
-        Component.onCompleted: {
-            lm.append({"name":"A"});
-            lm.append({"name":"B"});
-            lm.append({"name":"C"});
-            lm.append({"name":"D"});
-            lm.append({"name":"E"});
-            lm.append({"name":"F"});
-        }
+//    枚举类型和值必须以大写字母开头
+    enum TextTpye{//枚举类型
+        Normal, //0
+        Heading //1
     }
 
-    delegate:Text {//如何显示
-        width: 240; height: 30
-        color: ListView.isCurrentItem ? "red":"black"
-        text:name
+    property int textType: Main.Normal  //引用枚举类型 Main.qml
 
-        TapHandler{
-           onTapped: {
-               currentIndex = index
-           }
-        }
-    }
-
-    highlight: Rectangle{color:"lightgrey"}
+    font.bold: textType === Main.Heading    //false
+//    font.bold: textType === 1    //false
+    font.pixelSize: textType === Main.Heading ? 24:12   //false
 }
-
 
 
 
