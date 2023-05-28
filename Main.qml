@@ -1,8 +1,5 @@
 /*
- *  Loader QML 类型
- *  Loader: dynamically load example02: loader and destroy
- * 动态加载对象的访问和销毁
- *
+ * 任何被加载对象发射的信号都可以使用 Connections 类型进行接收。
  *
  * anthor:2019051604044liChengYang
  *
@@ -16,37 +13,25 @@
 import QtQuick
 import QtQuick.Controls
 
+
 Item {
     width: 300
     height: 200
-
-    Component{
-        id:redSquare
-        Rectangle{
-            color:"red"
-            width: 50
-            height: 50
-        }
+    Loader{
+        id:myLoader
+        source: "MyItem.qml"
     }
 
-    Loader{id:l1;sourceComponent: redSquare}
-    Loader{id:l2;source:"MyLabel.qml";x:100}
+    Connections{
+        target: myLoader.item
 
-    TapHandler{
-        onTapped: {
-//            item property 容纳了当前加载对象的顶层对象。
-            l1.sourceComponent = undefined
-            l2.source = ""
-
-            l1.source = "MyLabel.qml"
-            l2.sourceComponent = redSquare
-
-            l2.item.x = 60
-            l2.item.color = "blue"
+        //信号的定义
+        function onMessage(m:string){
+            console.log(m)
         }
     }
-
 }
+
 
 
 
