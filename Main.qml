@@ -1,5 +1,5 @@
 /*
- * 任何被加载对象发射的信号都可以使用 Connections 类型进行接收。
+ * GridView test 01
  *
  * anthor:2019051604044liChengYang
  *
@@ -14,23 +14,20 @@ import QtQuick
 import QtQuick.Controls
 
 
-Item {
-    width: 300
-    height: 200
-    Loader{
-        id:myLoader
-        source: "MyItem.qml"
-    }
 
-    Connections{
-        target: myLoader.item
+GridView {
+    width: 400; height: 100
 
-        //信号的定义
-        function onMessage(m:string){
-            console.log(m)
-        }
+    model: ContactModel {} //4张图片  from ContactModel.qml
+
+    delegate: Column { //how to display
+        Image { source: portrait; anchors.horizontalCenter: parent.horizontalCenter }
+        Text { text: name; anchors.horizontalCenter: parent.horizontalCenter }
     }
 }
+
+
+
 
 
 

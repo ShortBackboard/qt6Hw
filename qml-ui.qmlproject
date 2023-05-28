@@ -19,7 +19,4 @@ Project {
     importPaths: [ "/opt/lib" ]
     //    importPaths: [ "/opt/lib" ,"/opt/qml/, etc."]
 
-
-
-    mainUiFile: "MyItem.qml"
 }
