@@ -1,26 +1,32 @@
 /*
- *  JS 资源导入
  *
- *  如果使用特殊的 .pragma 标记这些库,变成共享库
  * anthor:2019051604044liChengYang
  *
  * date:2023-5-29
+ *
  *
 */
 
 //Main.qml
 
 import QtQuick
-import "factorial.js" as FactorialCalculator
+import QtQuick.Controls
 
 
-Row{
+Rectangle {
+    width: 100
+    height: 100
+    color: "lightsteelblue"
 
-    Calculator{}
-    Calculator{ input:6 }
-
-    TapHandler{
-        onTapped:
-            console.log(FactorialCalculator.factorialCallCount())
+    TapHandler {
+        onTapped: console.log("left clicked")
+        onLongPressed: console.log("long clicked")
+        onDoubleTapped: console.log("double clicked")
     }
+
+    TapHandler {
+        acceptedButtons: Qt.RightButton
+        onTapped: console.log("right clicked")
+    }
+
 }
