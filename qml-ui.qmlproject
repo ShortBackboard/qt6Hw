@@ -19,4 +19,6 @@ Project {
     importPaths: [ "/opt/lib" ]
     //    importPaths: [ "/opt/lib" ,"/opt/qml/, etc."]
 
+
+    mainUiFile: "factorial.js"
 }
