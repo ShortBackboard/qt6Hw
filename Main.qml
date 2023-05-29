@@ -1,43 +1,18 @@
 /*
- * GridView test 01
+ *  JS 资源导入
  *
  * anthor:2019051604044liChengYang
  *
- * date:2023-5-28
+ * date:2023-5-29
  *
 */
 
 //Main.qml
 
-
 import QtQuick
-import QtQuick.Controls
 
-
-
-GridView {
-    width: 400; height: 100
-
-    model: ContactModel {} //4张图片  from ContactModel.qml
-
-    delegate: Column { //how to display
-        Image { source: portrait; anchors.horizontalCenter: parent.horizontalCenter }
-        Text { text: name; anchors.horizontalCenter: parent.horizontalCenter }
-    }
+Row{
+    spacing: 5
+    MyButton{}
+    MyButton{}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
