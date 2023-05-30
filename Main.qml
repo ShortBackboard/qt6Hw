@@ -13,29 +13,26 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-GroupBox {
-    id:gridBox
-    title: "Grid Layout"
-    Layout.fillWidth:true
+Rectangle{
+    id:r; width: 400;height: 200
+    Rectangle{
+        id:sig; width: 200; height: 100; state: "NORMAL"
+        states: [
+            State {
+                name: "NORMAL"
+                PropertyChanges {sig{color:"green";width:200}}
+            },
+            State {
+                name: "CRITICAL"
+                PropertyChanges {sig{color:"red";width:sig.height}}
+                PropertyChanges {taph.onLongPressed: console.log("override")}
+            }
+        ]
 
-    GridLayout{
-        id:gridLayout
-        rows:3
-        flow:GridLayout.TopToBottom
-        anchors.fill: parent
-        Label{text:"Line 1"}
-        Label{text:"Line 2"}
-        Label{text:"Line 3"}
-
-        TextField{} TextField{} TextField{}
-        TextField{} TextField{} TextField{}
-
-        TextArea{
-            text: "This widget spans over 3 rows in the GridLayout.\n"
-                +"All items in the GridLayout are implicitly positioned from top to bottom";
-            Layout.rowSpan: 3
-            Layout.fillHeight: true
-            Layout.fillWidth: true
+        TapHandler{
+            id:taph
+            onTapped: sig.state === "NORMAL" ? sig.state = "CRITICAL" : sig.state = "NORMAL"
+            onLongPressed: console.log("origin")
         }
     }
 }
